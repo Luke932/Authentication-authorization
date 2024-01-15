@@ -1,0 +1,29 @@
+
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: animateBackground 20s linear infinite;
+}
+
+
+
+.login-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+button, h1 {
+  margin-top: 1rem;
+}
+
+button {
+  margin-bottom: 1rem;
+  position: relative;
+  left: 40%;
+}
