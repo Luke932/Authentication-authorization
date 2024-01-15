@@ -17,26 +17,31 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
     private final JWTAuthFilter jwtAT;
-    private final MyCorsFilter cors;
+
+
     @Autowired
-    public SecurityConfig(JWTAuthFilter jwtAT,MyCorsFilter cors){
-        this.jwtAT=jwtAT;
-        this.cors=cors;
+    public SecurityConfig(JWTAuthFilter jwtAT) {
+        this.jwtAT = jwtAT;
     }
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(c -> c.disable());
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         // Configura le regole di autorizzazione
+        http.authorizeHttpRequests(auth -> auth.requestMatchers("/utenti/**").permitAll());
         http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 
         // Aggiungi il filtro CORS prima del filtro JWT
         http.addFilterBefore(jwtAT, UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(cors, JWTAuthFilter.class);
+
 
         return http.build();
     }
+
+
+
 
 
     @Bean
